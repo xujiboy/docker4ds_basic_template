@@ -2,13 +2,18 @@ version: '3.7'  # the version of docker-compose
 services: 
 
   dev:
-    image: basic_data_science:dev-0.1   # custom-naming the image and specify a tag
+    image: basic_data_science:conda-py37-0.1   # custom-naming the image and specify a tag
     build:
       context: ./proj
       dockerfile: Dockerfile
+      args:
+        - username=ji_xu
+        - userid=1000
+    container_name: basic_data_science
     ports:
       - 8889:8888
     volumes:
-      - ./proj/:/app/
-    command: ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
+      - ./proj/:/home/ji_xu/basic_data_science
+    command: ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser"]
+    #"--allow-root"
 
